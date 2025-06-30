@@ -8,6 +8,8 @@ const App = () => {
                     <h1>Find the <span className="text-gradient">movies</span> you'll enjoy without the Hassle</h1>
                     <img src="/vite.svg" alt="The Vite Logo"/>
                 </header>
+
+                <Search />
             </div>
         </main>
     );
