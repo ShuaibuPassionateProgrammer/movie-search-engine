@@ -2,7 +2,10 @@ const App = () => {
     return (
         <main className={"pattern"}>
             <div className="wrapper">
-                <header><img src="/vite.svg" alt="The Vite Logo"/></header>
+                <header>
+                    <h1>Find the movie you'll enjoy without the Hassle</h1>
+                    <img src="/vite.svg" alt="The Vite Logo"/>
+                </header>
             </div>
         </main>
     );
