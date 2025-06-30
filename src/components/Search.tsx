@@ -6,6 +6,10 @@ const person = {
     location: "Gotham city"
 };
 
+const { name, age, location } = person;
+
+console.log(name);
+
 const Search = (props) => {
     return (
         <div className="text-white text-3xl">{props.searchTerm}</div>
