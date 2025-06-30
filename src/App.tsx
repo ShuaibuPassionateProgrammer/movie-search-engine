@@ -12,7 +12,7 @@ const App = () => {
                     <img src="/vite.svg" alt="The Vite Logo"/>
                 </header>
 
-                <Search />
+                <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             </div>
         </main>
     );
