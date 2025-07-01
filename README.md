@@ -1,5 +1,5 @@
 
-# 🎬 mivie-search-engine
+# 🎬 movie-search-engine
 
 A powerful and modern movie search engine that helps you discover films with ease. Built with **React**, **TypeScript**, and **Vite** for optimal performance and developer experience.
 
