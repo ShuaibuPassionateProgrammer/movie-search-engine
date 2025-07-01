@@ -5,7 +5,7 @@ const App = () => {
     const [searchTerm, setSearchTerm] = useState("");
 
     return (
-        <main className={"pattern"}>
+        <main className="pattern">
             <div className="wrapper">
                 <header>
                     <h1>Find the <span className="text-gradient">movies</span> you'll enjoy without the Hassle</h1>
