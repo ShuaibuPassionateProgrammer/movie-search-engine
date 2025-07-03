@@ -28,15 +28,46 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
           "bg-white dark:bg-zinc-900 shadow-md border border-transparent";
         break;
     }
+    // Support for header, footer, and body slots via props or children destructuring
+    let header = null, footer = null, body = children;
+    // If children is an array, look for special props
+    if (Array.isArray(children)) {
+      header = children.find(
+        (child: any) => React.isValidElement(child) && child.props.slot === "header"
+      );
+      footer = children.find(
+        (child: any) => React.isValidElement(child) && child.props.slot === "footer"
+      );
+      body = children.filter(
+        (child: any) =>
+          !(
+            React.isValidElement(child) &&
+            (child.props.slot === "header" || child.props.slot === "footer")
+          )
+      );
+    }
     return (
       <div
         ref={ref}
-        className={`group/card rounded-xl p-6 transition-colors duration-300 ${variantClasses} ${className}`}
+        className={`relative group/card rounded-xl p-6 transition-colors duration-300 ${variantClasses} ${className}`}
         tabIndex={props.tabIndex ?? 0}
         aria-label={props["aria-label"] || "Card"}
         {...props}
       >
-        {children}
+        {/* Header slot */}
+        {header && (
+          <div className="mb-4 font-semibold text-lg text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+            {header}
+          </div>
+        )}
+        {/* Body */}
+        <div className="flex-1">{body}</div>
+        {/* Footer slot */}
+        {footer && (
+          <div className="mt-4 text-sm text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
+            {footer}
+          </div>
+        )}
         {/* Focus ring and hover effect for accessibility and microinteraction */}
         <span
           className="pointer-events-none absolute inset-0 rounded-xl ring-2 ring-transparent group-focus/card:ring-blue-400 group-hover/card:ring-blue-200 dark:group-focus/card:ring-blue-500 dark:group-hover/card:ring-blue-800 transition-all duration-200"
