@@ -10,6 +10,7 @@ interface MovieCardProps {
 }
 
 
+export const MovieCard: React.FC<MovieCardProps> = ({ movie, onLike }) => {
     const [isLiked, setIsLiked] = useState(false);
 
     const handleLikeClick = () => {
@@ -79,6 +80,4 @@ interface MovieCardProps {
             </div>
         </Card>
     );
-}
-
-export default MovieCard;
+};
