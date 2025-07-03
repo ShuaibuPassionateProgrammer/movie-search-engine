@@ -6,7 +6,7 @@ function ModeToggler() {
   const { theme, toggleTheme } = useTheme();
   return (
     <button
-      className="ml-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white focus:outline-none focus:ring-2 focus:ring-purple-400 hover:cursor-pointer"
+      className="ml-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white focus:outline-none focus:ring-2 focus:ring-purple-400 cursor-pointer"
       aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
       title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
       type="button"
