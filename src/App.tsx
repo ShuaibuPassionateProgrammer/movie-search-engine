@@ -5,8 +5,7 @@ interface TheLike {
 };
 
 const App = () => {
-    // Current state initialization mismatch
-    const [liked, setHasLiked] = useState<TheLike>(false); // Should be { userLike: false }
+    const [liked, setHasLiked] = useState<TheLike>({ userLike: false });
 
     return (
         <div className="container">
