@@ -3,7 +3,7 @@ interface MovieCardProps {
     onLike: (movieId: number) => void;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ movie, onLike }) => (
+export const MovieCard: React.FC<MovieCardProps> = ({ movie, onLike }) => (
     <div className="movie-card relative group overflow-hidden rounded-2xl bg-white/5 hover:bg-white/10 transition-all duration-300 shadow-xl hover:shadow-2xl">
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
         
