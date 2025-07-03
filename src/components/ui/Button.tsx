@@ -44,34 +44,63 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       lg: "px-6 py-3 text-lg h-12 min-w-[3rem]",
     };
     return (
-      <button
-        ref={ref}
-        type={props.type || "button"}
-        className={[
-          base,
-          variants[variant],
-          sizes[size],
-          loading ? "relative text-transparent pointer-events-none" : "",
-          className,
-        ].join(" ")}
-        disabled={disabled || loading}
-        aria-busy={loading}
-        {...props}
-      >
-        {/* Ripple effect */}
-        <span className="pointer-events-none absolute inset-0 rounded-md group-active:scale-95 group-active:bg-black/10 group-focus-visible:bg-black/10 transition-all duration-150" aria-hidden="true" />
-        {loading && (
-          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <svg className="animate-spin h-5 w-5 text-blue-500 dark:text-blue-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-            </svg>
-          </span>
-        )}
-        {!loading && leftIcon && <span className="mr-2 flex items-center">{leftIcon}</span>}
-        <span className={loading ? "invisible" : ""}>{children}</span>
-        {!loading && rightIcon && <span className="ml-2 flex items-center">{rightIcon}</span>}
-      </button>
+      // Ripple effect
+      const rippleRef = React.useRef<HTMLSpanElement>(null);
+      const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        if (props.onClick) props.onClick(e);
+        const button = e.currentTarget;
+        const ripple = rippleRef.current;
+        if (ripple) {
+          const rect = button.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          ripple.style.width = ripple.style.height = `${size}px`;
+          ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+          ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+          ripple.classList.remove("animate-ripple");
+          // Force reflow
+          void ripple.offsetWidth;
+          ripple.classList.add("animate-ripple");
+        }
+      };
+      return (
+        <button
+          ref={ref}
+          type={props.type || "button"}
+          className={[
+            base,
+            variants[variant],
+            sizes[size],
+            loading ? "relative text-transparent pointer-events-none" : "",
+            className,
+            "overflow-hidden focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
+          ].join(" ")}
+          disabled={disabled || loading}
+          aria-busy={loading}
+          aria-pressed={props['aria-pressed']}
+          tabIndex={props.tabIndex ?? 0}
+          onClick={handleClick}
+          {...props}
+        >
+          {/* Ripple effect span */}
+          <span
+            ref={rippleRef}
+            className="pointer-events-none absolute left-0 top-0 rounded-full bg-white/40 dark:bg-blue-200/20 opacity-0 animate-none"
+            style={{ zIndex: 1 }}
+            aria-hidden="true"
+          />
+          {loading && (
+            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+              <svg className="animate-spin h-5 w-5 text-blue-500 dark:text-blue-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+              </svg>
+            </span>
+          )}
+          {!loading && leftIcon && <span className="mr-2 flex items-center z-10">{leftIcon}</span>}
+          <span className={loading ? "invisible" : "z-10"}>{children}</span>
+          {!loading && rightIcon && <span className="ml-2 flex items-center z-10">{rightIcon}</span>}
+        </button>
+      );
     );
   }
 );
