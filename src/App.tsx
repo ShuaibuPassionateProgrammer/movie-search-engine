@@ -101,7 +101,6 @@ const App = () => {
                 </footer>
             </div>
         </div>
-        </div>
     );
 }
 
