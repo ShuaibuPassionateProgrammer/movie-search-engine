@@ -5,13 +5,14 @@ import "./card-animations.css";
 
 export type CardVariant = "elevated" | "outlined" | "flat";
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   variant?: CardVariant;
   /** Show loading skeleton state */
   loading?: boolean;
   /** Number of skeleton lines for body */
   skeletonLines?: number;
+  /** Optional badge/status (e.g. "New", "Top Rated") */
+  badge?: React.ReactNode;
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
@@ -62,7 +63,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         ref={ref}
         className={`relative group/card rounded-xl p-6 transition-colors duration-300 animate-fade-in overflow-hidden ${
           isClickable
-            ? "cursor-pointer hover:shadow-lg active:scale-[0.98] focus:shadow-lg focus:outline-none transition-transform" 
+            ? "cursor-pointer hover:shadow-2xl hover:-translate-y-0.5 active:scale-[0.98] focus:shadow-2xl focus:outline-none transition-transform" 
             : ""
         } ${variantClasses} ${className}`}
         tabIndex={props.tabIndex ?? (isClickable ? 0 : undefined)}
@@ -70,6 +71,12 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         role={props.role || (isClickable ? "button" : undefined)}
         {...props}
       >
+        {/* Badge/status */}
+        {props.badge && !loading && (
+          <span className="absolute top-3 right-3 z-20 px-3 py-1 rounded-full text-xs font-semibold bg-blue-600 text-white shadow-md dark:bg-blue-500 animate-fade-in">
+            {props.badge}
+          </span>
+        )}
         {/* Header slot */}
         {header && !loading && (
           <div className="mb-4 font-semibold text-lg text-zinc-900 dark:text-zinc-100 flex items-center gap-2 animate-fade-in select-none">
