@@ -6,11 +6,18 @@ interface SearchProps {
 }
 
 
+
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import { useRef, useEffect } from 'react';
+import { Button } from './ui/Button';
 
 const Search: React.FC<SearchProps> = ({ searchTerm, onSearch, isLoading }) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, []);
     return (
-        <div className="search-panel group relative max-w-2xl mx-auto w-full">
+        <div className="search-panel group relative max-w-2xl mx-auto w-full" role="search">
             {/* Search icon */}
             <svg
                 className="absolute left-4 top-3.5 h-5 w-5 text-purple-300 group-focus-within:text-purple-500 transition-colors pointer-events-none"
@@ -28,6 +35,7 @@ const Search: React.FC<SearchProps> = ({ searchTerm, onSearch, isLoading }) => {
 
             {/* Input field */}
             <input
+                ref={inputRef}
                 type="text"
                 value={searchTerm}
                 onChange={(e) => onSearch(e.target.value)}
@@ -43,14 +51,16 @@ const Search: React.FC<SearchProps> = ({ searchTerm, onSearch, isLoading }) => {
 
             {/* Clear button */}
             {searchTerm && !isLoading && (
-                <button
+                <Button
                     type="button"
-                    className="absolute right-12 top-3.5 p-1 rounded-full bg-white/10 hover:bg-white/20 text-purple-200 hover:text-purple-400 transition-colors"
+                    variant="ghost"
+                    size="sm"
+                    className="absolute right-12 top-3.5 p-1 rounded-full min-w-0 min-h-0 bg-white/10 hover:bg-white/20 text-purple-200 hover:text-purple-400 transition-colors"
                     onClick={() => onSearch("")}
                     aria-label="Clear search"
                 >
                     <XMarkIcon className="w-5 h-5" />
-                </button>
+                </Button>
             )}
 
             {/* Loading spinner */}
