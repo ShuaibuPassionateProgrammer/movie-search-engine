@@ -3,8 +3,10 @@ import React from "react";
 import "./card-animations.css";
 
 
+
 export type CardVariant = "elevated" | "outlined" | "flat";
 
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   variant?: CardVariant;
   /** Show loading skeleton state */
