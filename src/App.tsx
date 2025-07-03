@@ -7,12 +7,19 @@ interface TheLike {
 const App = () => {
     const [movies, setMovies] = useState<Movie[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string>('');
 
     const handleSearch = async (term: string) => {
-        setIsLoading(true);
-        const results = await searchMovies(term);
-        setMovies(results);
-        setIsLoading(false);
+        try {
+            setIsLoading(true);
+            setError('');
+            const results = await searchMovies(term);
+            setMovies(results.length ? results : []);
+        } catch (err) {
+            setError('Failed to search movies. Please try again later.');
+        } finally {
+            setIsLoading(false);
+        }
     };
     const [liked, setHasLiked] = useState<TheLike>({ userLike: false });
 
