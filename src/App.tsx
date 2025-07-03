@@ -59,23 +59,37 @@ const App = () => {
                     </div>
                 )}
 
+
+                {/* Movie grid or empty state */}
                 {!isLoading && !error && (
-                    <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8 mt-8 sm:mt-12 pb-8 sm:pb-12">
-                        <AnimatePresence initial={false}>
-                            {movies.map((movie) => (
-                                <motion.div
-                                    key={movie.id}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, scale: 0.9 }}
-                                    transition={{ duration: 0.3 }}
-                                    layout
-                                >
-                                    <MovieCard movie={movie} onLike={handleLike} />
-                                </motion.div>
-                            ))}
-                        </AnimatePresence>
-                    </div>
+                    movies.length > 0 ? (
+                        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8 mt-8 sm:mt-12 pb-8 sm:pb-12" role="list" aria-label="Movie results">
+                            <AnimatePresence initial={false}>
+                                {movies.map((movie) => (
+                                    <motion.div
+                                        key={movie.id}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, scale: 0.9 }}
+                                        transition={{ duration: 0.3 }}
+                                        layout
+                                        role="listitem"
+                                    >
+                                        <MovieCard movie={movie} onLike={handleLike} />
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
+                        </div>
+                    ) : (
+                        <div className="flex flex-col items-center justify-center mt-16 text-center select-none" aria-live="polite">
+                            <svg className="w-16 h-16 text-purple-400 mb-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2" />
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
+                            </svg>
+                            <p className="text-lg text-white/80 font-semibold mb-2">No movies found</p>
+                            <p className="text-purple-200 text-base">Try searching for a different title.</p>
+                        </div>
+                    )
                 )}
 
                 <footer className="mt-12 sm:mt-16 border-t border-white/10 pt-6 sm:pt-8 text-center">
