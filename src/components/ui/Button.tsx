@@ -73,6 +73,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             />
           </svg>
         )}
+        {children}
       </button>
     );
   }
