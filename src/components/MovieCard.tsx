@@ -2,6 +2,7 @@ import type { Movie } from '../api/movieService';
 import { HeartIcon, StarIcon, PlusIcon } from '@heroicons/react/24/solid';
 import React, { useState } from 'react';
 import { Button } from './ui/Button';
+import { Card } from './ui/Card';
 
 interface MovieCardProps {
     movie: Movie;
@@ -9,7 +10,6 @@ interface MovieCardProps {
 }
 
 
-export const MovieCard: React.FC<MovieCardProps> = ({ movie, onLike }) => {
     const [isLiked, setIsLiked] = useState(false);
 
     const handleLikeClick = () => {
@@ -17,11 +17,16 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie, onLike }) => {
         onLike(movie.id);
     };
 
+    // Example genres, replace with real genres if available
+    const genres = movie.genre_ids ? movie.genre_ids.map((id: number) => `Genre ${id}`) : [];
+
     return (
-        <div
-            className="movie-card relative group overflow-hidden rounded-2xl bg-white/5 hover:bg-white/15 transition-all duration-300 shadow-xl hover:shadow-2xl focus-within:ring-2 ring-purple-400"
+        <Card
+            className="movie-card relative group overflow-hidden rounded-2xl bg-white/5 hover:bg-white/15 transition-all duration-300 shadow-xl hover:shadow-2xl focus-within:ring-2 ring-purple-400 p-0"
             tabIndex={0}
             aria-label={`Movie card: ${movie.title}`}
+            role="article"
+            aria-labelledby={`movie-title-${movie.id}`}
         >
             {/* Overlay for hover/focus */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10 group-hover:bg-black/40 group-focus:bg-black/40 transition-all duration-300"></div>
@@ -32,7 +37,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie, onLike }) => {
             />
             <div className="absolute bottom-0 left-0 right-0 z-20 p-4">
                 {/* Title and year */}
-                <h3 className="text-xl font-bold text-white mb-1 drop-shadow-lg">{movie.title}</h3>
+                <h3 id={`movie-title-${movie.id}`} className="text-xl font-bold text-white mb-1 drop-shadow-lg">{movie.title}</h3>
                 <div className="flex justify-between items-center text-purple-100 mb-1">
                     <span className="text-sm">{new Date(movie.release_date).getFullYear()}</span>
                     <div className="flex items-center space-x-1">
@@ -40,9 +45,13 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie, onLike }) => {
                         <span>{movie.vote_average.toFixed(1)}</span>
                     </div>
                 </div>
-                {/* Placeholder for genres */}
+                {/* Render genres */}
                 <div className="flex flex-wrap gap-2 mb-2">
-                    {/* Example: <span className="bg-purple-700/60 text-xs text-white px-2 py-0.5 rounded">Action</span> */}
+                    {genres.map((genre, idx) => (
+                        <span key={idx} className="bg-purple-700/60 text-xs text-white px-2 py-0.5 rounded select-none">
+                            {genre}
+                        </span>
+                    ))}
                 </div>
                 {/* Movie overview/description */}
                 {movie.overview && (
@@ -68,6 +77,6 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie, onLike }) => {
                     <PlusIcon className="w-5 h-5" /> Add to Favorites
                 </Button>
             </div>
-        </div>
+        </Card>
     );
 };
