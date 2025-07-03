@@ -1,6 +1,7 @@
 import type { Movie } from '../api/movieService';
 import { HeartIcon, StarIcon, PlusIcon } from '@heroicons/react/24/solid';
 import React, { useState } from 'react';
+import { Button } from './ui/Button';
 
 interface MovieCardProps {
     movie: Movie;
@@ -48,24 +49,24 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie, onLike }) => {
                     <p className="text-white/80 text-xs mb-3 line-clamp-3 min-h-[2.5em]">{movie.overview}</p>
                 )}
                 {/* Like button */}
-                <button
+                <Button
                     onClick={handleLikeClick}
-                    className={`absolute top-2 right-2 p-2 rounded-full backdrop-blur-sm
-                        ${isLiked ? 'bg-rose-500/90' : 'bg-white/10'} 
-                        transition-all duration-300 hover:scale-110
-                        ${isLiked ? 'hover:bg-rose-400' : 'hover:bg-white/20'}
-                        ring-0 hover:ring-2 ring-white/30 focus:outline-none`}
+                    variant={isLiked ? "danger" : "ghost"}
+                    size="sm"
+                    className={`absolute top-2 right-2 p-2 rounded-full min-w-0 min-h-0 shadow-none ${isLiked ? 'bg-rose-500/90' : 'bg-white/10'} ${isLiked ? 'hover:bg-rose-400' : 'hover:bg-white/20'} backdrop-blur-sm`}
                     aria-label={isLiked ? 'Unlike' : 'Like'}
                 >
                     <HeartIcon className={`w-6 h-6 ${isLiked ? 'text-white' : 'text-white/80'}`} />
-                </button>
+                </Button>
                 {/* Add to Favorites button */}
-                <button
+                <Button
+                    variant="solid"
+                    size="md"
                     className="mt-4 w-full flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg transform hover:scale-[1.02] transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400"
                     aria-label="Add to Favorites"
                 >
                     <PlusIcon className="w-5 h-5" /> Add to Favorites
-                </button>
+                </Button>
             </div>
         </div>
     );
