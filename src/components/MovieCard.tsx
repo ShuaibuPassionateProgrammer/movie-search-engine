@@ -26,6 +26,14 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onLike }) => (
 
             <button
                 onClick={() => onLike(movie.id)}
+                className={`absolute top-2 right-2 p-2 rounded-full backdrop-blur-sm
+                    ${isLiked ? 'bg-rose-500/90' : 'bg-white/10'} 
+                    transition-all duration-300 hover:scale-110
+                    ${isLiked ? 'hover:bg-rose-400' : 'hover:bg-white/20'}
+                    ring-0 hover:ring-2 ring-white/30`}
+            >
+                <HeartIcon className={`w-6 h-6 ${isLiked ? 'text-white' : 'text-white/80'}`} />
+            </button>
                 className="mt-4 w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg
                          transform hover:scale-[1.02] transition-transform duration-200"
             >
