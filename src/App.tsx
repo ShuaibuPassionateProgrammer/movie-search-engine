@@ -39,7 +39,7 @@ const App = () => {
                 {/* Header with branding and mode toggler */}
                 <header className="flex flex-col sm:flex-row items-center justify-between mb-8 sm:mb-12 gap-4 sm:gap-0" aria-label="App header">
                     <div className="flex flex-col sm:flex-row items-center space-y-1 sm:space-y-0 sm:space-x-3 w-full sm:w-auto">
-                        <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight drop-shadow-lg text-center sm:text-left">🎬 Movie Search</span>
+                        <span className="text-2xl sm:text-3xl font-extrabold text-gradient tracking-tight drop-shadow-lg text-center sm:text-left">🎬 Movie Search</span>
                         <span className="text-purple-200 text-base sm:text-lg font-light ml-0 sm:ml-2 text-center sm:text-left">Find your next favorite film</span>
                     </div>
                     <ModeToggler />
