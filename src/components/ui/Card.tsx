@@ -4,14 +4,15 @@ import "./card-animations.css";
 
 export type CardVariant = "elevated" | "outlined" | "flat";
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   variant?: CardVariant;
+  loading?: boolean;
+  skeletonLines?: number; // number of skeleton lines for body
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
   (
-    { children, className = "", variant = "elevated", ...props },
+    { children, className = "", variant = "elevated", loading = false, skeletonLines = 3, ...props },
     ref
   ) => {
     let variantClasses = "";
@@ -59,26 +60,42 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         {...props}
       >
         {/* Header slot */}
-        {header && (
+        {header && !loading && (
           <div className="mb-4 font-semibold text-lg text-zinc-900 dark:text-zinc-100 flex items-center gap-2 animate-fade-in">
             {header}
           </div>
         )}
+        {/* Skeleton header */}
+        {header && loading && (
+          <div className="mb-4 h-6 w-1/3 bg-zinc-200 dark:bg-zinc-700 rounded animate-pulse" />
+        )}
         {/* Body */}
         <div className="flex-1 animate-fade-in-slow">
-          {typeof body === "string" ? (
+          {loading ? (
+            <div className="space-y-2">
+              {Array.from({ length: skeletonLines }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-4 w-full bg-zinc-200 dark:bg-zinc-700 rounded animate-pulse"
+                  style={{ width: `${80 - i * 10}%` }}
+                />
+              ))}
+            </div>
+          ) : typeof body === "string" ? (
             <span className="whitespace-pre-line break-words text-zinc-700 dark:text-zinc-200 text-base">{body}</span>
           ) : (
             body
           )}
         </div>
         {/* Footer slot */}
-        {footer && (
+        {footer && !loading && (
           <div className="mt-4 text-sm text-zinc-500 dark:text-zinc-400 flex items-center gap-2 animate-fade-in">
             {footer}
           </div>
         )}
-        {/* Focus ring and hover effect for accessibility and microinteraction */}
+        {footer && loading && (
+          <div className="mt-4 h-4 w-1/4 bg-zinc-200 dark:bg-zinc-700 rounded animate-pulse" />
+        )}
         {/* Subtle gradient overlay for depth */}
         <span
           className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-transparent via-zinc-50/40 to-zinc-200/10 dark:via-zinc-900/30 dark:to-zinc-800/20"
