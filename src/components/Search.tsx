@@ -10,7 +10,7 @@ const { name, age, location } = person;
 
 console.log(name);
 
-const Search = (props) => {
+const Search = ({ searchTerm }) => {
     return (
         <div className="text-white text-3xl">{props.searchTerm}</div>
     );
