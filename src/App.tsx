@@ -24,9 +24,28 @@ const App = () => {
     const [liked, setHasLiked] = useState<TheLike>({ userLike: false });
 
     return (
-        <div className="container">
-            <button onClick={() => setHasLiked({ userLike: true })}>Like</button>
+        <div className="container mx-auto px-4 py-8">
+            <Search onSearch={handleSearch} />
             
+            {isLoading && <Loader />}
+            
+            {error && (
+                <div className="mt-8 p-4 bg-red-500/20 text-red-300 rounded-lg">
+                    {error}
+                </div>
+            )}
+
+            {!isLoading && !error && (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+                    {movies.map(movie => (
+                        <MovieCard 
+                            key={movie.id} 
+                            movie={movie}
+                            onLike={handleLike}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
