@@ -14,3 +14,5 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
     );
   }
 );
+
+export default Card;
