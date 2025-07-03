@@ -107,6 +107,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       </button>
     );
   }
+);
 
 // NOTE: You must define the following CSS for the ripple effect to work:
 // .animate-ripple {
