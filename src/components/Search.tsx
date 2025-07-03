@@ -10,9 +10,16 @@ const { name, age, location } = person;
 
 console.log(name);
 
-// Missing props type definition
-const Search = ({ searchTerm }: { searchTerm: string }) => {
-  return <div className="search"></div>;
+interface SearchProps {
+    searchTerm: string;
+}
+
+const Search: React.FC<SearchProps> = ({ searchTerm }) => {
+    return (
+        <div className="search">
+            {/* Search implementation */}
+        </div>
+    );
 };
 
 export default Search;
