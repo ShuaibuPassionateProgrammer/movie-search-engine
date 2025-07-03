@@ -106,6 +106,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {!loading && rightIcon && <span className="ml-2 flex items-center z-10">{rightIcon}</span>}
       </button>
     );
+  }
+
 // NOTE: You must define the following CSS for the ripple effect to work:
 // .animate-ripple {
 //   opacity: 0.4;
@@ -117,7 +119,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 //   transform: scale(0);
 //   transition: none;
 // }
-  }
 
 Button.displayName = "Button";
 export default Button;
