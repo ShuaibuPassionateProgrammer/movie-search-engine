@@ -5,7 +5,7 @@ const Button = () => {
 
     return (
         <div>
-            <h1></h1>
+            <h1>{name}</h1>
         </div>
     );
 };
