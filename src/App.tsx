@@ -44,7 +44,7 @@ const App = () => {
                     <ModeToggler />
                 </header>
 
-    <Search onSearch={handleSearch} searchTerm={""} />
+    <Search onSearch={handleSearch} searchTerm={""} isLoading={isLoading} />
 
                 {isLoading && (
                     <div className="mt-16">
