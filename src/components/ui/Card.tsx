@@ -1,5 +1,6 @@
 
 import React from "react";
+import "./card-animations.css";
 
 export type CardVariant = "elevated" | "outlined" | "flat";
 
