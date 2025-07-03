@@ -8,7 +8,7 @@ const App = () => {
     const [liked, setHasLiked] = useState<TheLike>(false);
 
     return (
-        <></>
+        <div className="container"></div>
     );
 };
 
