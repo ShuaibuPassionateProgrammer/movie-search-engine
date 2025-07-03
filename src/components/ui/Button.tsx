@@ -6,7 +6,7 @@ const Button = () => {
     return (
         <div>
             <h1>{name}</h1>
-            <button>Change Name</button>
+            <button onClick={handleChangeName}>Change Name</button>
         </div>
     );
 };
