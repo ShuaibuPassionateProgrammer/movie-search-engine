@@ -52,7 +52,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
     return (
       <div
         ref={ref}
-        className={`relative group/card rounded-xl p-6 transition-colors duration-300 ${variantClasses} ${className}`}
+        className={`relative group/card rounded-xl p-6 transition-colors duration-300 animate-fade-in ${variantClasses} ${className}`}
         tabIndex={props.tabIndex ?? 0}
         aria-label={props["aria-label"] || "Card"}
         {...props}
@@ -64,7 +64,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
           </div>
         )}
         {/* Body */}
-        <div className="flex-1">{body}</div>
+        <div className="flex-1 animate-fade-in-slow">{body}</div>
         {/* Footer slot */}
         {footer && (
           <div className="mt-4 text-sm text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
@@ -73,7 +73,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         )}
         {/* Focus ring and hover effect for accessibility and microinteraction */}
         <span
-          className="pointer-events-none absolute inset-0 rounded-xl ring-2 ring-transparent group-focus/card:ring-blue-400 group-hover/card:ring-blue-200 dark:group-focus/card:ring-blue-500 dark:group-hover/card:ring-blue-800 transition-all duration-200"
+          className="pointer-events-none absolute inset-0 rounded-xl ring-2 ring-transparent group-focus/card:ring-blue-400 group-hover/card:ring-blue-200 dark:group-focus/card:ring-blue-500 dark:group-hover/card:ring-blue-800 transition-all duration-200 animate-fade-in"
           aria-hidden="true"
         />
       </div>
