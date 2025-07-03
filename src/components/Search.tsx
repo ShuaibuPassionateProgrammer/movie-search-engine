@@ -37,8 +37,13 @@ const Search: React.FC<SearchProps> = ({ searchTerm, onSearch }) => (
             type="text"
             value={searchTerm}
             onChange={(e) => onSearch(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 focus:border-purple-400 focus:ring-2 focus:ring-purple-500/30 transition-all duration-300"
+            className="w-full... transition-all duration-300"
             placeholder="Search for movies..."
+            style={{ 
+                boxShadow: searchTerm 
+                    ? '0 8px 32px -4px rgba(99 102 241 / 0.4)'
+                    : 'none'
+            }}
         />
     </div>
 );
