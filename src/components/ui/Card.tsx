@@ -31,10 +31,17 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
     return (
       <div
         ref={ref}
-        className={`rounded-xl p-6 transition-colors duration-300 ${variantClasses} ${className}`}
+        className={`group/card rounded-xl p-6 transition-colors duration-300 ${variantClasses} ${className}`}
+        tabIndex={props.tabIndex ?? 0}
+        aria-label={props["aria-label"] || "Card"}
         {...props}
       >
         {children}
+        {/* Focus ring and hover effect for accessibility and microinteraction */}
+        <span
+          className="pointer-events-none absolute inset-0 rounded-xl ring-2 ring-transparent group-focus/card:ring-blue-400 group-hover/card:ring-blue-200 dark:group-focus/card:ring-blue-500 dark:group-hover/card:ring-blue-800 transition-all duration-200"
+          aria-hidden="true"
+        />
       </div>
     );
   }
