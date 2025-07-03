@@ -8,7 +8,9 @@ const App = () => {
     const [liked, setHasLiked] = useState<TheLike>(false);
 
     return (
-        <div className="container"></div>
+        <div className="container">
+            <button onClick={() => setHasLiked({ userLike: true })}>Like</button>
+        </div>
     );
 };
 
