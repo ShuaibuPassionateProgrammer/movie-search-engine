@@ -55,7 +55,7 @@ const App = () => {
                     )}
 
                     {error && (
-                        <div className="mt-8 p-4 sm:p-6 bg-red-400/20 backdrop-blur-lg rounded-xl border border-red-400/30 flex items-center space-x-3 sm:space-x-4">
+                        <div className="mt-8 p-4 sm:p-6 bg-red-400/20 backdrop-blur-lg rounded-xl border border-red-400/30 flex items-center space-x-3 sm:space-x-4" aria-live="assertive">
                             <ExclamationTriangleIcon className="w-6 h-6 sm:w-8 sm:h-8 text-red-400" />
                             <span className="text-red-100 text-base sm:text-lg">{error}</span>
                         </div>
@@ -64,7 +64,7 @@ const App = () => {
                     {/* Movie grid or empty state */}
                     {!isLoading && !error && (
                         movies.length > 0 ? (
-                            <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8 mt-8 sm:mt-12 pb-8 sm:pb-12" role="list" aria-label="Movie results">
+                            <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8 mt-8 sm:mt-12 pb-8 sm:pb-12 overflow-x-auto" role="list" aria-label="Movie results">
                                 <AnimatePresence initial={false}>
                                     {movies.map((movie) => (
                                         <motion.div
@@ -82,8 +82,8 @@ const App = () => {
                                 </AnimatePresence>
                             </div>
                         ) : (
-                            <div className="flex flex-col items-center justify-center mt-16 text-center select-none" aria-live="polite">
-                                <svg className="w-16 h-16 text-purple-400 mb-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                            <div className="flex flex-col items-center justify-center mt-16 text-center select-none animate-fade-in-slow" aria-live="polite">
+                                <svg className="w-16 h-16 text-purple-400 mb-4 animate-bounce" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2" />
                                     <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
                                 </svg>
