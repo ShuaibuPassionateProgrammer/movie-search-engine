@@ -5,7 +5,7 @@ interface TheLike {
 };
 
 const App = () => {
-    const [liked, setHasLiked] = useState<TheLike>();
+    const [liked, setHasLiked] = useState<TheLike>(false);
 
     return (
         <></>
