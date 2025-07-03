@@ -1,5 +1,5 @@
 
-
+interface SearchProps {
     searchTerm: string;
     onSearch: (term: string) => void;
     isLoading?: boolean;
