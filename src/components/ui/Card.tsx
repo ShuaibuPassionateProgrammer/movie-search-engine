@@ -2,12 +2,16 @@
 import React from "react";
 import "./card-animations.css";
 
+
 export type CardVariant = "elevated" | "outlined" | "flat";
 
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   variant?: CardVariant;
+  /** Show loading skeleton state */
   loading?: boolean;
-  skeletonLines?: number; // number of skeleton lines for body
+  /** Number of skeleton lines for body */
+  skeletonLines?: number;
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
