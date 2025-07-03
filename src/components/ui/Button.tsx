@@ -28,3 +28,21 @@ const sizeClasses: Record<ButtonSize, string> = {
   lg: "px-6 py-3 text-lg rounded-xl",
 };
 
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      children,
+      variant = "primary",
+      size = "md",
+      isLoading = false,
+      className = "",
+      disabled,
+      ...props
+    },
+    ref
+  ) => {
+    
+  }
+);
+
+Button.displayName = "Button";
