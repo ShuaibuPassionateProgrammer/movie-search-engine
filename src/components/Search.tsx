@@ -1,5 +1,7 @@
-import React from "react";
+// Remove test code (lines 3-12)
+import React from 'react';
 
+// Rest of the Search component implementation
 const person = {
     name: "Bruce Lee",
     age: 36,
