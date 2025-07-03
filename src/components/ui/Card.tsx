@@ -31,20 +31,23 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
     // Support for header, footer, and body slots via props or children destructuring
     let header = null, footer = null, body = children;
     // If children is an array, look for special props
+    function isElementWithSlot(child: unknown, slotName: string): child is React.ReactElement<{ slot: string }> {
+      return (
+        React.isValidElement(child) &&
+        (child as React.ReactElement<any>).props?.slot === slotName
+      );
+    }
+    function isElementWithAnySlot(child: unknown): child is React.ReactElement<{ slot: string }> {
+      return (
+        React.isValidElement(child) &&
+        ((child as React.ReactElement<any>).props?.slot === "header" ||
+          (child as React.ReactElement<any>).props?.slot === "footer")
+      );
+    }
     if (Array.isArray(children)) {
-      header = children.find(
-        (child: any) => React.isValidElement(child) && child.props.slot === "header"
-      );
-      footer = children.find(
-        (child: any) => React.isValidElement(child) && child.props.slot === "footer"
-      );
-      body = children.filter(
-        (child: any) =>
-          !(
-            React.isValidElement(child) &&
-            (child.props.slot === "header" || child.props.slot === "footer")
-          )
-      );
+      header = children.find((child) => isElementWithSlot(child, "header"));
+      footer = children.find((child) => isElementWithSlot(child, "footer"));
+      body = children.filter((child) => !isElementWithAnySlot(child));
     }
     return (
       <div
