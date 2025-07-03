@@ -12,7 +12,7 @@ console.log(name);
 
 const Search = ({ searchTerm }) => {
     return (
-        <div className="text-white text-3xl">{props.searchTerm}</div>
+        <div className="search"></div>
     );
 };
 
