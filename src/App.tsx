@@ -45,9 +45,20 @@ const App = () => {
                 {!isLoading && !error && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
                                 gap-8 mt-12 pb-12">
-                        {movies.map(movie => (
-                            <MovieCard key={movie.id} movie={movie} onLike={handleLike} />
-                        ))}
+                        <AnimatePresence initial={false}>
+                            {movies.map((movie) => (
+                                <motion.div
+                                    key={movie.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.9 }}
+                                    transition={{ duration: 0.3 }}
+                                    layout
+                                >
+                                    <MovieCard movie={movie} onLike={handleLike} />
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
                     </div>
                 )}
 
