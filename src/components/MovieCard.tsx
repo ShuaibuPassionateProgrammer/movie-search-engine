@@ -19,7 +19,10 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie, onLike }) => {
     };
 
     // Example genres, replace with real genres if available
-    const genres = movie.genre_ids ? movie.genre_ids.map((id: number) => `Genre ${id}`) : [];
+    // If you have a genres array or genre_ids, map them to names here
+    const genres: string[] = Array.isArray((movie as any).genres)
+      ? ((movie as any).genres as string[])
+      : [];
 
     return (
         <Card
