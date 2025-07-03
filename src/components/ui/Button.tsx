@@ -47,7 +47,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // Ripple effect
     const rippleRef = React.useRef<HTMLSpanElement>(null);
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      if (props.onClick) props.onClick(e);
+      // Ripple effect
       const button = e.currentTarget;
       const ripple = rippleRef.current;
       if (ripple) {
@@ -61,8 +61,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         void ripple.offsetWidth;
         ripple.classList.add("animate-ripple");
       }
+      if (typeof props.onClick === 'function') {
+        props.onClick(e);
+      }
     };
-
     return (
       <button
         ref={ref}
@@ -77,8 +79,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ].join(" ")}
         disabled={disabled || loading}
         aria-busy={loading}
-        aria-pressed={props['aria-pressed']}
-        tabIndex={props.tabIndex ?? 0}
+        // Only set aria-pressed if provided
+        {...(typeof props['aria-pressed'] !== 'undefined' ? { 'aria-pressed': props['aria-pressed'] } : {})}
+        // Only set tabIndex if provided
+        {...(typeof props.tabIndex !== 'undefined' ? { tabIndex: props.tabIndex } : {})}
         onClick={handleClick}
         {...props}
       >
@@ -101,6 +105,18 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <span className={loading ? "invisible" : "z-10"}>{children}</span>
         {!loading && rightIcon && <span className="ml-2 flex items-center z-10">{rightIcon}</span>}
       </button>
+    );
+// NOTE: You must define the following CSS for the ripple effect to work:
+// .animate-ripple {
+//   opacity: 0.4;
+//   transform: scale(2);
+//   transition: opacity 0.4s, transform 0.4s;
+// }
+// .pointer-events-none.animate-ripple {
+//   opacity: 0;
+//   transform: scale(0);
+//   transition: none;
+// }
     );
   }
 );
