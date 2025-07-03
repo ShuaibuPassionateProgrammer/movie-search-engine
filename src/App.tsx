@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Search from "./components/Search";
 import { Loader } from "./components/Loader";
 import { MovieCard } from "./components/MovieCard";
