@@ -10,6 +10,7 @@ function ModeToggler() {
       aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
       title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
       type="button"
+      aria-pressed={theme === 'dark'}
       onClick={toggleTheme}
     >
       {theme === 'dark' ? (
