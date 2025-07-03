@@ -10,10 +10,9 @@ const { name, age, location } = person;
 
 console.log(name);
 
-const Search = ({ searchTerm }) => {
-    return (
-        <div className="search"></div>
-    );
+// Missing props type definition
+const Search = ({ searchTerm }: { searchTerm: string }) => {
+  return <div className="search"></div>;
 };
 
 export default Search;
