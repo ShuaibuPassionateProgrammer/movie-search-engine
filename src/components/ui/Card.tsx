@@ -55,17 +55,24 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       footer = children.find((child) => isElementWithSlot(child, "footer"));
       body = children.filter((child) => !isElementWithAnySlot(child));
     }
+    // Allow for clickable/interactive cards
+    const isClickable = !!props.onClick || props.role === "button";
     return (
       <div
         ref={ref}
-        className={`relative group/card rounded-xl p-6 transition-colors duration-300 animate-fade-in overflow-hidden ${variantClasses} ${className}`}
-        tabIndex={props.tabIndex ?? 0}
+        className={`relative group/card rounded-xl p-6 transition-colors duration-300 animate-fade-in overflow-hidden ${
+          isClickable
+            ? "cursor-pointer hover:shadow-lg active:scale-[0.98] focus:shadow-lg focus:outline-none transition-transform" 
+            : ""
+        } ${variantClasses} ${className}`}
+        tabIndex={props.tabIndex ?? (isClickable ? 0 : undefined)}
         aria-label={props["aria-label"] || "Card"}
+        role={props.role || (isClickable ? "button" : undefined)}
         {...props}
       >
         {/* Header slot */}
         {header && !loading && (
-          <div className="mb-4 font-semibold text-lg text-zinc-900 dark:text-zinc-100 flex items-center gap-2 animate-fade-in">
+          <div className="mb-4 font-semibold text-lg text-zinc-900 dark:text-zinc-100 flex items-center gap-2 animate-fade-in select-none">
             {header}
           </div>
         )}
@@ -74,7 +81,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
           <div className="mb-4 h-6 w-1/3 bg-zinc-200 dark:bg-zinc-700 rounded animate-pulse" />
         )}
         {/* Body */}
-        <div className="flex-1 animate-fade-in-slow">
+        <div className="flex-1 animate-fade-in-slow min-h-[1.5rem]">
           {loading ? (
             <div className="space-y-2">
               {Array.from({ length: skeletonLines }).map((_, i) => (
@@ -86,14 +93,14 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
               ))}
             </div>
           ) : typeof body === "string" ? (
-            <span className="whitespace-pre-line break-words text-zinc-700 dark:text-zinc-200 text-base">{body}</span>
+            <span className="whitespace-pre-line break-words text-zinc-700 dark:text-zinc-200 text-base select-text">{body}</span>
           ) : (
             body
           )}
         </div>
         {/* Footer slot */}
         {footer && !loading && (
-          <div className="mt-4 text-sm text-zinc-500 dark:text-zinc-400 flex items-center gap-2 animate-fade-in">
+          <div className="mt-4 text-sm text-zinc-500 dark:text-zinc-400 flex items-center gap-2 animate-fade-in select-none">
             {footer}
           </div>
         )}
@@ -101,10 +108,13 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
           <div className="mt-4 h-4 w-1/4 bg-zinc-200 dark:bg-zinc-700 rounded animate-pulse" />
         )}
         {/* Subtle gradient overlay for depth */}
-        <span
-          className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-transparent via-zinc-50/40 to-zinc-200/10 dark:via-zinc-900/30 dark:to-zinc-800/20"
-          aria-hidden="true"
-        />
+        {/* Subtle gradient overlay for depth, only on non-loading */}
+        {!loading && (
+          <span
+            className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-transparent via-zinc-50/40 to-zinc-200/10 dark:via-zinc-900/30 dark:to-zinc-800/20"
+            aria-hidden="true"
+          />
+        )}
         {/* Focus ring and hover effect for accessibility and microinteraction */}
         <span
           className="pointer-events-none absolute inset-0 rounded-xl ring-2 ring-transparent group-focus/card:ring-blue-400 group-hover/card:ring-blue-200 dark:group-focus/card:ring-blue-500 dark:group-hover/card:ring-blue-800 transition-all duration-200 animate-fade-in"
