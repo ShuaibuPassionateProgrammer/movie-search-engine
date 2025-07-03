@@ -1,4 +1,11 @@
 import React, { useState } from "react";
+import Search from "./components/Search";
+import Loader from "./components/Loader";
+import MovieCard from "./components/MovieCard";
+import { searchMovies, Movie } from "./api/movieService";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import { AnimatePresence, motion } from "framer-motion";
+import ModeToggler from "./components/ui/ModeToggler";
 
 interface TheLike {
     userLike: boolean;
@@ -21,7 +28,10 @@ const App = () => {
             setIsLoading(false);
         }
     };
-    const [liked, setHasLiked] = useState<TheLike>({ userLike: false });
+    // Remove unused like state for now
+
+    // Like handler placeholder
+    const handleLike = () => {};
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-gray-900">
@@ -32,11 +42,7 @@ const App = () => {
                         <span className="text-3xl font-extrabold text-white tracking-tight drop-shadow-lg">🎬 Movie Search</span>
                         <span className="hidden sm:inline text-purple-200 text-lg font-light ml-2">Find your next favorite film</span>
                     </div>
-                    {/* Mode toggler placeholder */}
-                    <React.Suspense fallback={null}>
-                        {/* @ts-ignore */}
-                        <ModeToggler />
-                    </React.Suspense>
+                    <ModeToggler />
                 </header>
 
                 <Search onSearch={handleSearch} />
