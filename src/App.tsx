@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import Search from "./components/Search";
-import Loader from "./components/Loader";
+import { Loader } from "./components/Loader";
 import MovieCard from "./components/MovieCard";
-import { searchMovies, Movie } from "./api/movieService";
+import { searchMovies } from "./api/movieService";
+import type { Movie } from "./api/movieService";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import ModeToggler from "./components/ui/ModeToggler";
 
-interface TheLike {
-    userLike: boolean;
-};
+
 
 const App = () => {
     const [movies, setMovies] = useState<Movie[]>([]);
@@ -45,7 +44,7 @@ const App = () => {
                     <ModeToggler />
                 </header>
 
-                <Search onSearch={handleSearch} />
+    <Search onSearch={handleSearch} searchTerm={""} />
 
                 {isLoading && (
                     <div className="mt-16">
