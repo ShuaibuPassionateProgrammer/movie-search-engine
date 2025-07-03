@@ -17,18 +17,30 @@ interface SearchProps {
     onSearch: (term: string) => void;
 }
 
-const Search: React.FC<SearchProps> = ({ searchTerm, onSearch }) => {
-    return (
-        <div className="search-panel p-4 bg-white/10 backdrop-blur-lg rounded-lg">
-            <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => onSearch(e.target.value)}
-                className="w-full px-4 py-2 rounded-lg bg-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400"
-                placeholder="Search movies..."
+const Search: React.FC<SearchProps> = ({ searchTerm, onSearch }) => (
+    <div className="search-panel group relative max-w-2xl mx-auto w-full">
+        <svg
+            className="absolute left-4 top-3.5 h-5 w-5 text-purple-300 group-focus-within:text-purple-500 transition-colors"
+            fill="none"
+            viewBox="0 0 24 24"
+        >
+            <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             />
-        </div>
-    );
-};
+        </svg>
+        
+        <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => onSearch(e.target.value)}
+            className="w-full pl-12 pr-4 py-3 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 focus:border-purple-400 focus:ring-2 focus:ring-purple-500/30 transition-all duration-300"
+            placeholder="Search for movies..."
+        />
+    </div>
+);
 
 export default Search;
