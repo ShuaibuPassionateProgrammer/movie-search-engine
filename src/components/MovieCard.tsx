@@ -79,4 +79,6 @@ interface MovieCardProps {
             </div>
         </Card>
     );
-};
+}
+
+export default MovieCard;
