@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 const Button = () => {
     const [name, setName] = useState("Shuaibu");
 
-    const handleChangeName = () => {};
+    const handleChangeName = () => {
+        setName("Passionate Programmer");
+    };
 
     return (
         <div>
