@@ -53,25 +53,37 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
     return (
       <div
         ref={ref}
-        className={`relative group/card rounded-xl p-6 transition-colors duration-300 animate-fade-in ${variantClasses} ${className}`}
+        className={`relative group/card rounded-xl p-6 transition-colors duration-300 animate-fade-in overflow-hidden ${variantClasses} ${className}`}
         tabIndex={props.tabIndex ?? 0}
         aria-label={props["aria-label"] || "Card"}
         {...props}
       >
         {/* Header slot */}
         {header && (
-          <div className="mb-4 font-semibold text-lg text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+          <div className="mb-4 font-semibold text-lg text-zinc-900 dark:text-zinc-100 flex items-center gap-2 animate-fade-in">
             {header}
           </div>
         )}
         {/* Body */}
-        <div className="flex-1 animate-fade-in-slow">{body}</div>
+        <div className="flex-1 animate-fade-in-slow">
+          {typeof body === "string" ? (
+            <span className="whitespace-pre-line break-words text-zinc-700 dark:text-zinc-200 text-base">{body}</span>
+          ) : (
+            body
+          )}
+        </div>
         {/* Footer slot */}
         {footer && (
-          <div className="mt-4 text-sm text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
+          <div className="mt-4 text-sm text-zinc-500 dark:text-zinc-400 flex items-center gap-2 animate-fade-in">
             {footer}
           </div>
         )}
+        {/* Focus ring and hover effect for accessibility and microinteraction */}
+        {/* Subtle gradient overlay for depth */}
+        <span
+          className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-br from-transparent via-zinc-50/40 to-zinc-200/10 dark:via-zinc-900/30 dark:to-zinc-800/20"
+          aria-hidden="true"
+        />
         {/* Focus ring and hover effect for accessibility and microinteraction */}
         <span
           className="pointer-events-none absolute inset-0 rounded-xl ring-2 ring-transparent group-focus/card:ring-blue-400 group-hover/card:ring-blue-200 dark:group-focus/card:ring-blue-500 dark:group-hover/card:ring-blue-800 transition-all duration-200 animate-fade-in"
