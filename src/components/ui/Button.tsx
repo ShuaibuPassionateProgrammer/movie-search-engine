@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-const Button = () => {};
+const Button = () => {
+
+    return (
+        <></>
+    );
+};
 
 export default Button;
