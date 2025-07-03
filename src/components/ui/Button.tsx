@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 const Button = () => {
+    const [name, setName] = useState("Shuaibu");
 
     return (
-        <div></div>
+        <div>
+            <h1></h1>
+        </div>
     );
 };
 
