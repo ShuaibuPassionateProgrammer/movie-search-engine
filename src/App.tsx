@@ -55,7 +55,7 @@ const App = () => {
                       <span className="text-purple-200 text-base sm:text-lg font-light leading-tight">Find your next favorite film</span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 sm:gap-4 mt-4 sm:mt-0">
+                  <div className="flex items-center gap-2 sm:gap-4 mt-4 sm:mt-0 justify-end w-full sm:w-auto">
                     <ModeToggler />
                   </div>
                   {/* Divider for visual separation on mobile */}
