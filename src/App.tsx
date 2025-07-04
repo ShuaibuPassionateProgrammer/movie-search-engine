@@ -36,13 +36,30 @@ const App = () => {
             {/* Skip to content link for accessibility */}
             <a href="#main-content" className="sr-only focus:not-sr-only absolute top-2 left-2 bg-purple-700 text-white px-4 py-2 rounded z-50 focus:outline-none focus:ring-2 focus:ring-white">Skip to main content</a>
             <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 max-w-7xl flex-1 w-full">
-                {/* Header with branding and mode toggler */}
-                <header className="flex flex-col sm:flex-row items-center justify-between mb-8 sm:mb-12 gap-4 sm:gap-0" aria-label="App header">
-                    <div className="flex flex-col sm:flex-row items-center space-y-1 sm:space-y-0 sm:space-x-3 w-full sm:w-auto">
-                        <span className="text-2xl sm:text-3xl font-extrabold text-gradient tracking-tight drop-shadow-lg text-center sm:text-left">🎬 Movie Search</span>
-                        <span className="text-purple-200 text-base sm:text-lg font-light ml-0 sm:ml-2 text-center sm:text-left">Find your next favorite film</span>
+                {/* Header with branding, logo, and mode toggler */}
+                <header
+                  className="relative flex flex-col sm:flex-row items-center justify-between mb-8 sm:mb-12 gap-4 sm:gap-0 px-4 py-4 sm:py-6 rounded-2xl bg-gradient-to-br from-white/5 via-purple-900/10 to-blue-900/10 shadow-lg border border-white/10"
+                  aria-label="App header"
+                  role="banner"
+                >
+                  <div className="flex items-center gap-3 w-full sm:w-auto">
+                    {/* Logo (replace src with your logo if available) */}
+                    <img
+                      src="/vite.svg"
+                      alt="App Logo"
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-purple-500/60 to-blue-500/60 shadow-md border border-white/20 mr-2"
+                      style={{ objectFit: 'cover' }}
+                    />
+                    <div className="flex flex-col">
+                      <span className="text-2xl sm:text-3xl font-extrabold text-gradient tracking-tight drop-shadow-lg leading-tight">🎬 Movie Search</span>
+                      <span className="text-purple-200 text-base sm:text-lg font-light leading-tight">Find your next favorite film</span>
                     </div>
+                  </div>
+                  <div className="flex items-center gap-2 sm:gap-4 mt-4 sm:mt-0">
                     <ModeToggler />
+                  </div>
+                  {/* Divider for visual separation on mobile */}
+                  <span className="absolute left-0 bottom-0 w-full h-0.5 bg-gradient-to-r from-purple-500/20 via-blue-500/10 to-transparent rounded-b-2xl" aria-hidden="true" />
                 </header>
 
                 <main id="main-content" tabIndex={-1} className="outline-none">
