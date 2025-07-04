@@ -2,7 +2,6 @@ import type { Movie } from '../api/movieService';
 import { HeartIcon, StarIcon, PlusIcon } from '@heroicons/react/24/solid';
 import React, { useState } from 'react';
 import { Button } from './ui/Button';
-import { Card } from './ui/Card';
 
 interface MovieCardProps {
     movie: Movie;
