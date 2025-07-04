@@ -83,18 +83,18 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         {header && !loading && (
           <div className="mb-4 flex flex-row items-center gap-3 font-semibold text-lg text-zinc-900 dark:text-zinc-100 animate-fade-in select-none">
             {/* If header is a React element with children, arrange nicely */}
-            {React.isValidElement(header) && header.props.children ? (
-              Array.isArray(header.props.children) ? (
+            {React.isValidElement(header) && (header as React.ReactElement<any>).props && (header as React.ReactElement<any>).props.children ? (
+              Array.isArray((header as React.ReactElement<any>).props.children) ? (
                 <>
                   <span className="flex-shrink-0 flex items-center justify-center mr-2">
-                    {header.props.children[0]}
+                    {(header as React.ReactElement<any>).props.children[0]}
                   </span>
                   <span className="flex-1 truncate">
-                    {header.props.children.slice(1)}
+                    {(header as React.ReactElement<any>).props.children.slice(1)}
                   </span>
                 </>
               ) : (
-                <span className="flex-1 truncate">{header.props.children}</span>
+                <span className="flex-1 truncate">{(header as React.ReactElement<any>).props.children}</span>
               )
             ) : (
               <span className="flex-1 truncate">{header}</span>
