@@ -82,16 +82,23 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         {/* Header slot */}
         {header && !loading && (
           <div className="mb-4 flex flex-row items-center gap-3 font-semibold text-lg text-zinc-900 dark:text-zinc-100 animate-fade-in select-none">
-            {/* Icon or badge slot (optional, left) */}
-            {Array.isArray(header.props?.children) && header.props.children[0] ? (
-              <span className="flex-shrink-0 flex items-center justify-center mr-2">
-                {header.props.children[0]}
-              </span>
-            ) : null}
-            {/* Main header content */}
-            <span className="flex-1 truncate">
-              {Array.isArray(header.props?.children) ? header.props.children.slice(1) : header}
-            </span>
+            {/* If header is a React element with children, arrange nicely */}
+            {React.isValidElement(header) && header.props.children ? (
+              Array.isArray(header.props.children) ? (
+                <>
+                  <span className="flex-shrink-0 flex items-center justify-center mr-2">
+                    {header.props.children[0]}
+                  </span>
+                  <span className="flex-1 truncate">
+                    {header.props.children.slice(1)}
+                  </span>
+                </>
+              ) : (
+                <span className="flex-1 truncate">{header.props.children}</span>
+              )
+            ) : (
+              <span className="flex-1 truncate">{header}</span>
+            )}
           </div>
         )}
         {/* Skeleton header */}
